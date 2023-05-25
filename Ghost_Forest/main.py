@@ -5,24 +5,24 @@ clock = pygame.time.Clock()
 pygame.init()
 screen = pygame.display.set_mode((618, 359)) #flags=pygame.NOFRAME
 pygame.display.set_caption("Ghost Forest")
-icon = pygame.image.load('Week4/Day5/images/icon.png').convert_alpha()
+icon = pygame.image.load('Ghost_Forest/images/icon.png').convert_alpha()
 pygame.display.set_icon(icon)
 
 # Player
-bg = pygame.image.load('Week4/Day5/images/bg.png').convert()
-player = pygame.image.load('Week4/Day5/images//left/1.png').convert_alpha()
+bg = pygame.image.load('Ghost_Forest/images/bg.png').convert()
+player = pygame.image.load('Ghost_Forest/images/left/1.png').convert_alpha()
 walk_left = [
-    pygame.image.load('Week4/Day5/images/left/1.png'),
-    pygame.image.load('Week4/Day5/images/left/2.png'),
-    pygame.image.load('Week4/Day5/images/left/3.png'),
-    pygame.image.load('Week4/Day5/images/left/4.png')
+    pygame.image.load('Ghost_Forest/images/left/1.png'),
+    pygame.image.load('Ghost_Forest/images/left/2.png'),
+    pygame.image.load('Ghost_Forest/images/left/3.png'),
+    pygame.image.load('Ghost_Forest/images/left/4.png')
 ]
 
 walk_right = [
-    pygame.image.load('Week4/Day5/images/right/5.png'),
-    pygame.image.load('Week4/Day5/images/right/6.png'),
-    pygame.image.load('Week4/Day5/images/right/7.png'),
-    pygame.image.load('Week4/Day5/images/right/8.png')
+    pygame.image.load('Ghost_Forest/images/right/5.png'),
+    pygame.image.load('Ghost_Forest/images/right/6.png'),
+    pygame.image.load('Ghost_Forest/images/right/7.png'),
+    pygame.image.load('Ghost_Forest/images/right/8.png')
 ]
 
 
@@ -37,23 +37,23 @@ is_jumping = False
 jump_count = 8
 
 # Monster
-ghost = pygame.image.load('Week4/Day5/images/ghost.png').convert_alpha()
+ghost = pygame.image.load('Ghost_Forest/images/ghost.png').convert_alpha()
 # ghost_x = 620
 ghost_list_in_game = []
 ghost_timer = pygame.USEREVENT + 1
 pygame.time.set_timer(ghost_timer, 2500)
 
 #Background
-bg_sound = pygame.mixer.Sound('Week4/Day5/melody.mp3')
+bg_sound = pygame.mixer.Sound('Ghost_Forest/melody.mp3')
 bg_sound.play()
 
-label = pygame.font.Font('Week4/Day5/Roboto/Roboto-Black.ttf', 50)
+label = pygame.font.Font('Ghost_Forest/Roboto/Roboto-Black.ttf', 50)
 lose_label = label.render('GAME OVER!', False, (200, 200, 50))
-restart_label = label.render('   Play again', False, (200, 50, 50))
+restart_label = label.render(' Play again ', False, (200, 50, 50))
 restart_label_rect = restart_label.get_rect(topleft=(180, 200))
 
 bullets_left = 5
-bullet = pygame.image.load('Week4/Day5/images/bullet.png')
+bullet = pygame.image.load('Ghost_Forest/images/bullet.png')
 bullets = []
 
 gameplay = True
