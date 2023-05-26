@@ -12,17 +12,17 @@ pygame.display.set_icon(icon)
 bg = pygame.image.load('Ghost_Forest/images/bg.png').convert()
 player = pygame.image.load('Ghost_Forest/images/left/1.png').convert_alpha()
 walk_left = [
-    pygame.image.load('Ghost_Forest/images/left/1.png'),
-    pygame.image.load('Ghost_Forest/images/left/2.png'),
-    pygame.image.load('Ghost_Forest/images/left/3.png'),
-    pygame.image.load('Ghost_Forest/images/left/4.png')
+    pygame.image.load('Ghost_Forest/images/left/1.png').convert_alpha(),
+    pygame.image.load('Ghost_Forest/images/left/2.png').convert_alpha(),
+    pygame.image.load('Ghost_Forest/images/left/3.png').convert_alpha(),
+    pygame.image.load('Ghost_Forest/images/left/4.png').convert_alpha(),
 ]
 
 walk_right = [
-    pygame.image.load('Ghost_Forest/images/right/5.png'),
-    pygame.image.load('Ghost_Forest/images/right/6.png'),
-    pygame.image.load('Ghost_Forest/images/right/7.png'),
-    pygame.image.load('Ghost_Forest/images/right/8.png')
+    pygame.image.load('Ghost_Forest/images/right/5.png').convert_alpha(),
+    pygame.image.load('Ghost_Forest/images/right/6.png').convert_alpha(),
+    pygame.image.load('Ghost_Forest/images/right/7.png').convert_alpha(),
+    pygame.image.load('Ghost_Forest/images/right/8.png').convert_alpha(),
 ]
 
 
@@ -36,12 +36,15 @@ player_y = 250
 is_jumping = False
 jump_count = 8
 
-# Monster
+# Enemies
 ghost = pygame.image.load('Ghost_Forest/images/ghost.png').convert_alpha()
-# ghost_x = 620
+monster = pygame.image.load('Ghost_Forest/images/monster.png').convert_alpha()
+
 ghost_list_in_game = []
-ghost_timer = pygame.USEREVENT + 1
-pygame.time.set_timer(ghost_timer, 2500)
+enemy_timer = pygame.USEREVENT + 1
+pygame.time.set_timer(enemy_timer, 2500)
+
+monster_list_in_game = []
 
 #Background
 bg_sound = pygame.mixer.Sound('Ghost_Forest/melody.mp3')
@@ -50,7 +53,7 @@ bg_sound.play()
 label = pygame.font.Font('Ghost_Forest/Roboto/Roboto-Black.ttf', 50)
 lose_label = label.render('GAME OVER!', False, (200, 200, 50))
 restart_label = label.render(' Play again ', False, (200, 50, 50))
-restart_label_rect = restart_label.get_rect(topleft=(180, 200))
+restart_label_rect = restart_label.get_rect(topleft=(160, 200))
 
 bullets_left = 5
 bullet = pygame.image.load('Ghost_Forest/images/bullet.png')
@@ -61,7 +64,6 @@ gameplay = True
 running = True
 while running:
 
-
     screen.blit(bg, (bg_x, 0))
     screen.blit(bg, (bg_x + 618, 0))
 
@@ -69,14 +71,26 @@ while running:
         player_rect = walk_left[0].get_rect(topleft=(player_x, player_y))
 
         if ghost_list_in_game:
-            for (i, el) in enumerate(ghost_list_in_game):
-                screen.blit(ghost, el)
-                el.x -= 10
+            for (i, g) in enumerate(ghost_list_in_game):
+                screen.blit(ghost, g)
+                g.x -= 10
 
-                if el.x < -20:
+                if g.x < -10:
                     ghost_list_in_game.pop(i)
         
-                if player_rect.colliderect(el):
+                if player_rect.colliderect(g):
+                    gameplay = False
+
+
+        if monster_list_in_game:
+            for (i, m) in enumerate(monster_list_in_game):
+                screen.blit(monster, m)
+                m.x -= 10
+
+                if m.x < -10:
+                    monster_list_in_game.pop(i)
+
+                if player_rect.colliderect(m):
                     gameplay = False
         
 
@@ -123,10 +137,10 @@ while running:
                 if el.x > 630:
                     bullets.pop(i)
 
-                if ghost_list_in_game:
-                    for (index, ghost_el) in enumerate(ghost_list_in_game):
-                        if el.colliderect(ghost_el) :
-                            ghost_list_in_game.pop(index)
+                if monster_list_in_game:
+                    for (index, monster_el) in enumerate(monster_list_in_game):
+                        if el.colliderect(monster_el) :
+                            monster_list_in_game.pop(index)
                             bullets.pop(i)
 
     else:
@@ -139,6 +153,7 @@ while running:
             gameplay = True
             player_x = 150
             ghost_list_in_game.clear()
+            monster_list_in_game.clear()
             bullets.clear()
             bullets_left = 5
 
@@ -148,8 +163,9 @@ while running:
         if event.type == pygame.QUIT:
             running = False
             pygame.quit()
-        if event.type == ghost_timer:
-            ghost_list_in_game.append(ghost.get_rect(topleft=(620, 235)))
+        if event.type == enemy_timer:
+            ghost_list_in_game.append(ghost.get_rect(topleft=(620, 215)))
+            monster_list_in_game.append(monster.get_rect(topleft=(800, 235)))
         if gameplay and event.type == pygame.KEYUP and event.key == pygame.K_SPACE and bullets_left > 0:
             bullets.append(bullet.get_rect(topleft=(player_x + 30, player_y + 10)))
             bullets_left -= 1
