@@ -1,6 +1,12 @@
 # Google Jumping Dino Game
 Welcome to the Google Jumping Dino Game! This is a Python game built using the Pygame library and connected to an external server on Elephant SQL. The game allows users to control a dinosaur character and jump over obstacles to reach higher levels. The user's game results, such as reached levels and received points, are saved in the connected database. Additionally, the game is designed to update the in-game record value whenever a user sets a new high score.
 
+## Table of Contents
+- [Usage](#usage)
+- [Game Controls](#game-controls)
+- [Database Integration](#database-integration)
+- [Video Review](#game-video-review)
+
 ### Usage
 1. Launch the game by running dino.py with Python.
 2. The game window will open, displaying the dinosaur character and the background.
