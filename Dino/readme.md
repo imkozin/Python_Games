@@ -27,4 +27,4 @@ The Google Jumping Dino Game is integrated with Elephant SQL, an external SQL da
 The db.py file contains the configuration details necessary to connect to your Elephant SQL database. Make sure to update this file with your specific connection information as described in the Installation section.
 
 ### Game Video Review 
-You can check here [![Video Review](https://www.loom.com/share/939bc94445ac4d62971678685c22f8e7?sid=f17b1e71-64ba-4ca5-986b-414034ae6654)].
+You can check the video review by clicking [here](https://www.loom.com/share/939bc94445ac4d62971678685c22f8e7?sid=f17b1e71-64ba-4ca5-986b-414034ae6654).
